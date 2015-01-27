@@ -15,6 +15,10 @@ module.exports = $generators.Base.extend({
   },
 
   prompting: function () {
+    if (this.taskName) {
+      return false;
+    }
+
     var done = this.async();
     var prompts = [];
 
@@ -44,24 +48,47 @@ module.exports = $generators.Base.extend({
       }
     }
 
-    if (this.options.new) {
-      addTask($tasksList, this.taskAdding, "init", true);
-      //addTask($tasksList, this.taskAdding, "build", false);
+    function newPackageJson(context) {
+      return {
+        name: context._.slugify(context.appName),
+        version: "0.0.0", description: "", author: context.config.userName, main: "gulpfile.js", dependencies: {}, devDependencies: { gulp : "*", "gulp-load-plugins" : "*" }
+      };
     }
+
+    if (this.taskName) { this.taskAdding = [this.taskName]; }
+    if (this.options.new || this.options.force) { addTask($tasksList, this.taskAdding, "init", true); }
 
     this.packageJson = {};
     this.dependencies = {};
+    var pathJson = this.destinationRoot() + '/package.json';
 
     if (this.options.force) {
       $fs.writeFile('gulpfile.js', '');
-      this.packageJson = {
-        name: this._.slugify(this.appName),
-        version: "0.0.0", description: "", author: this.config.userName, main: "gulpfile.js", dependencies: {}, devDependencies: { gulp : "*"}
-      };
-    } else {
-      var json = this.read(this.destinationRoot() + '/package.json');
-      this.packageJson = JSON.parse(json);
+      this.packageJson = newPackageJson(this);
+      return true;
     }
+
+    try {
+      this.packageJson = JSON.parse(this.read(pathJson));
+    } catch (error) {
+      this.packageJson = newPackageJson(this);
+    }
+  },
+
+  helpers: function () {
+    this.setDep = function (dependencies, depToSet) {
+      depToSet.map(function (dep) {
+        dependencies[dep] = '*';
+      });
+    };
+
+    this.merge = function (left, right) {
+      for (var key in right) {
+        if( right.hasOwnProperty(key)) {
+          left[key] = right[key];
+        }
+      }
+    };
   },
 
   writing : {
@@ -78,34 +105,28 @@ module.exports = $generators.Base.extend({
     },
 
     gulpfile : function () {
-      function setDep(dependencies, depToSet) {
-        depToSet.map(function (dep) {
-          dependencies[dep] = '*';
-        });
-      }
-
       for (var i = 0; i < $tasksList.length; i++) {
         var name = $tasksList[i].name;
         if(this.taskAdding.indexOf(name) >= 0){
           var stream = this.read('../tasks/' + name + '.template');
-          if ($tasksList[i].dep) { setDep(this.dependencies, $tasksList[i].dep); }
+          if ($tasksList[i].dep) { this.setDep(this.dependencies, $tasksList[i].dep); }
           $fs.appendFile('gulpfile.js', stream + "\n");
         }
       }
     },
 
     packageJson: function() {
-      this.packageJson.devDependencies = this.dependencies;
+      this.merge(this.packageJson.devDependencies, this.dependencies);
       this.write('package.json', JSON.stringify(this.packageJson, null, 2));
     }
 
   },
 
   install : function () {
-   /* this.installDependencies({
-      skipMessage: this.options['skip-install-message'],
+    this.installDependencies({
+      skipMessage: true, //this.options['skip-install-message'],
       skipInstall: this.options['skip-install']
-    });*/
+    });
   },
 
   end : function () {

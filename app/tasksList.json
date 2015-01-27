@@ -8,5 +8,5 @@
   { "name": "scripts", "value": "scripts", "checked": true, "dep" : ["gulp-uglify"] },
   { "name": "wiredep", "value": "wiredep", "checked": true, "dep" : ["wiredep", "gulp-if"] },
   { "name": "server", "value": "server", "checked": true, "dep" : ["connect", "connect-livereload", "gulp-livereload", "gulp-useref", "opn", "serve-static"] },
-  { "name": "build", "value": "build", "checked": true, "dep" : ["del", "gulp-size", "gulp-load-plugins"] }
+  { "name": "build", "value": "build", "checked": true, "dep" : ["del", "gulp-size"] }
 ]
