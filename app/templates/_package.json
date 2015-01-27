@@ -1,0 +1,9 @@
+{
+  "name": "<%= appName %>",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Martin Franck <franck.martin12@hotmail.com>",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {}
+}

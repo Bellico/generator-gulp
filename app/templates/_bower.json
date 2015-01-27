@@ -1,0 +1,12 @@
+{
+  "name": "<%= appName %>",
+  "description": "",
+  "version": "0.0.0",
+  "authors": [
+    "Martin Franck <franck.martin12@hotmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {}
+}

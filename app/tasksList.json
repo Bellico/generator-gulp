@@ -1,0 +1,4 @@
+[
+  { "name": "scss", "value": "scss", "checked": true, "dep" : ["plumber", "sass", "autoprefixer"] },
+  { "name": "coffee", "value": "coffee", "checked": true, "dep" : ["coffee", "sass"] }
+]

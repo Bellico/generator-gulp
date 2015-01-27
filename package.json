@@ -1,0 +1,9 @@
+{
+  "name": "generator-gulp",
+  "version": "0.1.0",
+  "description": "A gulp task generator",
+  "keywords": ["yeoman-generator"],
+  "dependencies": {
+    "yeoman-generator": "^0.17.3"
+  }
+}
