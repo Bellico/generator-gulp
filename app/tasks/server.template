@@ -1,0 +1,55 @@
+function initServe(dir){
+  var serveStatic = require('serve-static');
+
+  var app = require('connect')();
+
+  if(dir !== 'dist'){
+    app.use(require('connect-livereload')({port: 35729}))
+    .use('/bower_components', serveStatic('bower_components'));
+  }
+
+  app.use(serveStatic(dir));
+
+  require('http').createServer(app).listen(9000)
+  .on('listening', function () {
+    console.log('Started connect web server on http://localhost:9000');
+  });
+}
+
+function initProxy(){
+  var http = require('http');
+  var httpProxy = require('http-proxy');
+
+  var proxy = httpProxy.createProxyServer({});
+
+  var server = http.createServer(function(req, res) {
+    proxy.web(req, res, { target: 'http://127.0.0.1' });
+  });
+  console.log("listening on port 5050");
+  server.listen(5050);
+}
+
+gulp.task('connect', function () {
+  initServe('src');
+});
+
+gulp.task('watch-serve', ['connect'], function () {
+  plugins.livereload.listen();
+
+  gulp.watch([
+    'src/**/*.html',
+    'src/**/*.js',
+    'src/images/**/*',
+    "src/styles/**/*.css"
+    ]).on('change', plugins.livereload.changed);
+
+});
+
+gulp.task('serve', ['watch-serve', 'watch-common'], function(){
+  require('opn')('http://localhost:9000', 'firefox');
+});
+
+gulp.task('serve:dist', ['default'], function () {
+  initServe('dist');
+  require('opn')('http://localhost:9000');
+});

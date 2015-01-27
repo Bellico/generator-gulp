@@ -1,0 +1,5 @@
+gulp.task('styles', ['sass'], function () {
+  return gulp.src('src/styles/**/*.css')
+  .pipe(require('gulp-minify-css')())
+  .pipe(gulp.dest('dist/style.min'));
+});

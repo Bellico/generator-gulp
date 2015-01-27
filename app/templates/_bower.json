@@ -3,7 +3,7 @@
   "description": "",
   "version": "0.0.0",
   "authors": [
-    "Martin Franck <franck.martin12@hotmail.com>"
+    "<%= userName %>"
   ],
   "license": "MIT",
   "private": true,

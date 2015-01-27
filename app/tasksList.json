@@ -1,4 +1,12 @@
 [
-  { "name": "scss", "value": "scss", "checked": true, "dep" : ["plumber", "sass", "autoprefixer"] },
-  { "name": "coffee", "value": "coffee", "checked": true, "dep" : ["coffee", "sass"] }
+  { "name": "sass", "value": "sass", "checked": true, "dep" : ["gulp-autoprefixer", "gulp-plumber", "gulp-sass"] },
+  { "name": "coffee", "value": "coffee", "checked": true, "dep" : ["gulp-coffee"] },
+  { "name": "html", "value": "html", "checked": true, "dep" : ["gulp-minify-html"] },
+  { "name": "styles", "value": "styles", "checked": true, "dep" : ["gulp-minify-css"] },
+  { "name": "images", "value": "images", "checked": true, "dep" : ["gulp-imagemin", "gulp-cache"] },
+  { "name": "inject", "value": "inject", "checked": true, "dep" : ["gulp-inject"] },
+  { "name": "scripts", "value": "scripts", "checked": true, "dep" : ["gulp-uglify"] },
+  { "name": "wiredep", "value": "wiredep", "checked": true, "dep" : ["wiredep", "gulp-if"] },
+  { "name": "server", "value": "server", "checked": true, "dep" : ["connect", "connect-livereload", "gulp-livereload", "gulp-useref", "opn", "serve-static"] },
+  { "name": "build", "value": "build", "checked": true, "dep" : ["del", "gulp-size", "gulp-load-plugins"] }
 ]
