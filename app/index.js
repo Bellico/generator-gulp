@@ -37,6 +37,8 @@ module.exports = $generators.Base.extend({
   },
 
   configuring : function () {
+    this.packageJson = {};
+    this.dependencies = {};
 
     function addTask(tasklist, taskAdding, name, direction) {
       if (direction) {
@@ -58,10 +60,6 @@ module.exports = $generators.Base.extend({
     if (this.taskName) { this.taskAdding = [this.taskName]; }
     if (this.options.new || this.options.force) { addTask($tasksList, this.taskAdding, "init", true); }
 
-    this.packageJson = {};
-    this.dependencies = {};
-    var pathJson = this.destinationRoot() + '/package.json';
-
     if (this.options.force) {
       $fs.writeFile('gulpfile.js', '');
       this.packageJson = newPackageJson(this);
@@ -69,6 +67,7 @@ module.exports = $generators.Base.extend({
     }
 
     try {
+      var pathJson = this.destinationRoot() + '/package.json';
       this.packageJson = JSON.parse(this.read(pathJson));
     } catch (error) {
       this.packageJson = newPackageJson(this);
@@ -96,6 +95,9 @@ module.exports = $generators.Base.extend({
       if (this.options.new) {
         this.copy('.jshintrc', '.jshintrc');
         this.copy('_robots.txt', 'src/robots.txt');
+        this.mkdir('bower_components');
+        this.mkdir('src/styles');
+        this.mkdir('src/scripts');
         this.write('READMY.md', this.appName);
         this.write('.gitignore', 'node_modules/');
         this.template('_bower.json', 'bower.json', { appName: this._.slugify(this.appName), userName: this.config.userName });

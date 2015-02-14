@@ -1,0 +1,5 @@
+gulp.task("6to5", function () {
+  return gulp.src("src/app.js")
+    .pipe($.to5())
+    .pipe(gulp.dest("dist"));
+});

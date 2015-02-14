@@ -34,14 +34,14 @@ gulp.task('connect', function () {
 });
 
 gulp.task('watch-serve', ['connect'], function () {
-  plugins.livereload.listen();
+  $.livereload.listen();
 
   gulp.watch([
     'src/**/*.html',
     'src/**/*.js',
     'src/images/**/*',
     "src/styles/**/*.css"
-    ]).on('change', plugins.livereload.changed);
+    ]).on('change', $.livereload.changed);
 
 });
 

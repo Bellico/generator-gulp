@@ -1,12 +1,15 @@
 [
-  { "name": "sass", "value": "sass", "checked": true, "dep" : ["gulp-autoprefixer", "gulp-plumber", "gulp-sass"] },
-  { "name": "coffee", "value": "coffee", "checked": true, "dep" : ["gulp-coffee"] },
-  { "name": "html", "value": "html", "checked": true, "dep" : ["gulp-minify-html"] },
-  { "name": "styles", "value": "styles", "checked": true, "dep" : ["gulp-minify-css"] },
-  { "name": "images", "value": "images", "checked": true, "dep" : ["gulp-imagemin", "gulp-cache"] },
-  { "name": "inject", "value": "inject", "checked": true, "dep" : ["gulp-inject"] },
-  { "name": "scripts", "value": "scripts", "checked": true, "dep" : ["gulp-uglify"] },
-  { "name": "wiredep", "value": "wiredep", "checked": true, "dep" : ["wiredep", "gulp-if"] },
-  { "name": "server", "value": "server", "checked": true, "dep" : ["connect", "connect-livereload", "gulp-livereload", "gulp-useref", "opn", "serve-static"] },
-  { "name": "build", "value": "build", "checked": true, "dep" : ["del", "gulp-size"] }
+  { "name": "sass", "value": "sass", "checked": false, "dep" : ["gulp-autoprefixer", "gulp-plumber", "gulp-sass"] },
+  { "name": "coffee", "value": "coffee", "checked": false, "dep" : ["gulp-coffee", "gulp-plumber"] },
+  { "name": "html", "value": "html", "checked": false, "dep" : ["gulp-minify-html"] },
+  { "name": "styles", "value": "styles", "checked": false, "dep" : ["gulp-minify-css"] },
+  { "name": "images", "value": "images", "checked": false, "dep" : ["gulp-imagemin", "gulp-cache"] },
+  { "name": "inject", "value": "inject", "checked": false, "dep" : ["gulp-inject"] },
+  { "name": "scripts", "value": "scripts", "checked": false, "dep" : ["gulp-uglify"] },
+  { "name": "wiredep", "value": "wiredep", "checked": false, "dep" : ["wiredep", "gulp-if"] },
+  { "name": "6to5", "value": "6to5", "checked": false, "dep" : ["gulp-6to5"] },
+  { "name": "server", "value": "server", "checked": false, "dep" : ["connect", "connect-livereload", "gulp-livereload", "gulp-useref", "opn", "serve-static"] },
+  { "name": "browsersync", "value": "browsersync", "checked": false, "dep" : ["browser-sync"] },
+  { "name": "watch", "value": "watch", "checked": false, "dep" : [] },
+  { "name": "build", "value": "build", "checked": false, "dep" : ["del", "gulp-size"] }
 ]

@@ -1,0 +1,36 @@
+var browserSync = require('browser-sync');
+
+gulp.task('bs-reload', function () {
+  browserSync.reload({stream:true});
+});
+
+gulp.task('bs', function() {
+  browserSync({
+    notify: false,
+    server: {
+      baseDir: "src/",
+      routes: {"/bower_components": "/bower_components"}
+    },
+    browser: ["google chrome", "firefox"]
+  });
+});
+
+gulp.task('bs:proxy', function() {
+  browserSync({
+        //files: ["src/**/*.php", "src/styles/**/*.css", "src/**/*.js"],
+        proxy: "http://localhost/Php/QuickSimplePHP/",
+        browser: ["google chrome", "firefox"],
+        notify: false
+      });
+});
+
+gulp.task('watch-bs', function () {
+  gulp.watch("src/**/*.html", ['bs-reload']);
+  gulp.watch("src/styles/**/*.css", ['bs-reload']);
+  gulp.watch("src/**/*.js", ['bs-reload']);
+  gulp.watch("src/**/*.php", ['bs-reload']);
+});
+
+gulp.task('serve-bs', ['bs', 'watch-common', 'watch-bs']);
+
+gulp.task('serve-bs:proxy', ['bs:proxy', 'watch-common','watch-bs']);

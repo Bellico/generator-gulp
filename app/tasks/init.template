@@ -1,2 +1,2 @@
 var gulp = require('gulp');
-var plugins = require('gulp-load-plugins')({ pattern: ['gulp-*'] });
+var $ = require('gulp-load-plugins')({ pattern: ['gulp-*'] });

@@ -1,6 +1,6 @@
 gulp.task('images', function () {
   return gulp.src('src/assets/images/**/*')
-  .pipe(plugins.cache(plugins.imagemin({
+  .pipe($.cache($.imagemin({
     progressive: true,
     interlaced: true,
     optimizationLevel: 3,

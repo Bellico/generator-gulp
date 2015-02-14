@@ -1,5 +1,7 @@
 gulp.task('coffee', function() {
   return gulp.src('src/coffee/**/*.coffee')
-  .pipe(plugins.coffee({bare: true}).on('error', console.log))
+  .pipe($.plumber())
+  .pipe($.coffee({bare: true})).on('error', function (error) { console.log(error.message); this.emit('end');} )
   .pipe(gulp.dest('src/scripts/'));
 });
+

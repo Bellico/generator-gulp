@@ -1,8 +1,8 @@
 gulp.task('sass', function () {
   return gulp.src('src/scss/*.scss')
-  .pipe(plugins.plumber())
-  .pipe(plugins.sass())
-  .pipe(plugins.autoprefixer({
+  .pipe($.plumber())
+  .pipe($.sass()).on('error', function (error) { console.log(error.message); this.emit('end');} )
+  .pipe($.autoprefixer({
     browsers: ['last 2 versions'],
     cascade: true
   }))

@@ -1,5 +1,5 @@
 gulp.task('html', function () {
   return gulp.src('src/**/*.html')
-  .pipe(plugins.minifyHtml())
+  .pipe($.minifyHtml())
   .pipe(gulp.dest('dist/html.min'));
 });
